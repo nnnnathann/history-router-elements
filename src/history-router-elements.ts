@@ -103,7 +103,7 @@ window.customElements.define("history-router", HistoryRouter)
 function findRouterContextOrThrow(el: HTMLElement): HistoryRouter {
     const root = firstAncestor(el, (el: HTMLElement) => el.tagName.toLowerCase() === "history-router") as HistoryRouter | null
     if (!root) {
-        throw new Error("history-route requires a history-router root")
+        throw new Error(`<${el.tagName.toLowerCase()}> requires a <history-router> parent (${el.outerHTML})`)
     }
     return root
 }
