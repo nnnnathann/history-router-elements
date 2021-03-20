@@ -14,11 +14,15 @@
     "build:bundle": "NODE_ENV=production rollup -c rollup.config.js",
     "build:js": "babel -d lib -x .ts src",
     "test": "run-s build test:jest",
-    "test:jest": "jest"
+    "test:jest": "jest",
+    "pkg": "run-s build test pkg:make pkg:publish",
+    "pkg:make": "babel-node -x .ts scripts/build-package.ts",
+    "pkg:publish": "babel-node -x .ts scripts/publish.ts"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.10",
     "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.10",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-typescript": "^7.13.0",

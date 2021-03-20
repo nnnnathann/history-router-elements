@@ -1,6 +1,21 @@
 # history-router-elements
 minimal declarative custom element pushstate routing for browser apps
 
+### install
+
+```sh
+npm i -S history-router-elements
+```
+
+```sh
+yarn add history-router-elements
+```
+
+``html
+<script type="module" src="https://unpkg.com/history-router-elements/history-browser-elements.mjs"></script>
+<script type="nomodule" src="https://unpkg.com/history-router-elements/history-browser-elements.umd.js"></script>
+```
+
 
 ### usage
 

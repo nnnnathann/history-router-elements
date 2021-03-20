@@ -3,4 +3,5 @@
 /lib
 /dist
 /screenshots
+/packages
 .DS_Store
