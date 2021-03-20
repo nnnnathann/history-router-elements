@@ -20,8 +20,9 @@ module.exports = {
     },
     devtool: "eval-source-map",
     plugins: [
+        new HtmlWebpackPlugin({ template: "./index.html" }),
         ...(isProduction
-            ? [new BundleAnalyzerPlugin({ analyzerMode: "static" })]
-            : [new HtmlWebpackPlugin({ template: "./index.html" })]),
+            ? [new BundleAnalyzerPlugin({ analyzerMode: "static", openAnalyzer: false })]
+            : []),
     ]
 }
