@@ -1,5 +1,4 @@
-import { createHistory, Location } from "./history"
-
+import { createHistory, HistoryLocation } from "./history"
 
 class HistoryLink extends HTMLAnchorElement {
     #root?: HistoryRouter
@@ -16,11 +15,10 @@ class HistoryLink extends HTMLAnchorElement {
         this.#root.pushPath(path)
     }
 }
-customElements.define("history-link", HistoryLink, { extends: "a" })
 
 class HistoryRoute extends HTMLElement {
     #root?: HistoryRouter
-    #location?: Location
+    #location?: HistoryLocation
     #path?: string
     #template?: HTMLTemplateElement
     #el?: ShadowRoot
@@ -28,7 +26,7 @@ class HistoryRoute extends HTMLElement {
     static get observedAttributes() {
         return ["path"]
     }
-    attributeChangedCallback(attr: string, oldValue: string, newValue: string) {
+    attributeChangedCallback(attr: string, _oldValue: string, newValue: string) {
         if (attr === "path") {
             this.#path = newValue
             if (this.#location) {
@@ -52,7 +50,7 @@ class HistoryRoute extends HTMLElement {
     subscribe(root: HistoryRouter) {
         return root.subscribe((location) => this.setLocation(location))
     }
-    setLocation(location: Location) {
+    setLocation(location: HistoryLocation) {
         if (!this.#template || !this.#el) {
             return
         }
@@ -68,10 +66,8 @@ class HistoryRoute extends HTMLElement {
     }
 }
 
-customElements.define("history-route", HistoryRoute)
-
 type Unsubscribe = Function
-type LocationHandler = (loc: Location) => void
+type LocationHandler = (loc: HistoryLocation) => void
 class HistoryRouter extends HTMLElement {
     #subscribers: Set<LocationHandler>
     #history: ReturnType<typeof createHistory>
@@ -84,7 +80,7 @@ class HistoryRouter extends HTMLElement {
     connectedCallback() {
         this.#unsubscribe = this.#history.listen((a) => this.updateLocation(a.location))
     }
-    updateLocation(location: Location) {
+    updateLocation(location: HistoryLocation) {
         this.#subscribers.forEach((sub) => sub(location))
     }
     disconnectedCallback() {
@@ -100,7 +96,9 @@ class HistoryRouter extends HTMLElement {
     }
 }
 
-customElements.define("history-router", HistoryRouter)
+window.customElements.define("history-route", HistoryRoute)
+window.customElements.define("history-link", HistoryLink, { extends: "a" })
+window.customElements.define("history-router", HistoryRouter)
 
 function findRouterContextOrThrow(el: HTMLElement): HistoryRouter {
     const root = firstAncestor(el, (el: HTMLElement) => el.tagName.toLowerCase() === "history-router") as HistoryRouter | null
@@ -110,7 +108,8 @@ function findRouterContextOrThrow(el: HTMLElement): HistoryRouter {
     return root
 }
 
-function firstAncestor(start: HTMLElement, f: (el: HTMLElement) => boolean): HTMLElement | null {
+type ElementFilterFn = (el: HTMLElement) => boolean
+function firstAncestor(start: HTMLElement, f: ElementFilterFn): HTMLElement | null {
     let parent = start.parentElement
     while (parent) {
         if (f(parent)) {

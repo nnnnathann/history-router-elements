@@ -6,6 +6,13 @@
     </head>
     <body>
         <history-router>
+            <nav>
+                <ul>
+                    <li><a is="history-link" href="/">Home</a></li>
+                    <li><a is="history-link" href="/one">One</a></li>
+                    <li><a is="history-link" href="/two">Two</a></li>
+                </ul>
+            </nav>
             <history-route path="/">
                 <template>
                     <h1>Home</h1>
@@ -21,13 +28,7 @@
                     <h1>Two</h1>
                 </template>
             </history-route>
-            <nav>
-                <ul>
-                    <li><a is="history-link" href="/">Home</a></li>
-                    <li><a is="history-link" href="/one">One</a></li>
-                    <li><a is="history-link" href="/two">Two</a></li>
-                </ul>
-            </nav>
         </history-router>
+        <!-- {{scripts}} -->
     </body>
 </html>

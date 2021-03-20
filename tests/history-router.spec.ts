@@ -1,5 +1,4 @@
 import { chromium } from "playwright"
-import "../src/history-router"
 
 describe("history-router", () => {
     describe("history-route", () => {
@@ -15,7 +14,7 @@ describe("history-router", () => {
             title = await page.textContent("h1")
             await page.screenshot({ path: "screenshots/one.png" })
             expect(title).toEqual("One")
-            await page.click(`a[href="/two"]`)
+            await page.click("a[href=\"/two\"]")
             await page.screenshot({ path: "screenshots/two.png" })
             title = await page.textContent("h1")
             expect(title).toEqual("Two")
