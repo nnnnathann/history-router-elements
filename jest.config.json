@@ -1,0 +1,13 @@
+{
+    "modulePathIgnorePatterns": [
+        "node_modules",
+        "lib"
+    ],
+    "testPathIgnorePatterns": [
+        "node_modules",
+        "lib"
+    ],
+    "setupFilesAfterEnv": [
+        "<rootDir>/jest.setup.js"
+    ]
+}
