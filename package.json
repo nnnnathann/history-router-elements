@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "history-router-elements",
   "version": "0.1.0",
   "description": "minimal declarative custom element pushstate routing for browser apps",

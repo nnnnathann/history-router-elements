@@ -11,7 +11,7 @@ npm i -S history-router-elements
 yarn add history-router-elements
 ```
 
-``html
+```html
 <script type="module" src="https://unpkg.com/history-router-elements/history-browser-elements.mjs"></script>
 <script type="nomodule" src="https://unpkg.com/history-router-elements/history-browser-elements.umd.js"></script>
 ```
