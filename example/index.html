@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <history-router>
+            <a is="history-link" href="/">Home</a>
+            <a is="history-link" href="/one">One</a>
+            <history-route path="/">
+                <template>
+                    <h1>Home</h1>
+                </template>
+            </history-route>
+            <history-route path="/one">
+                <template>
+                    <h1>One</h1>
+                </template>
+            </history-route>
+        </history-router>
+        <script src="./index.js" async defer></script>
+    </body>
+</html>
