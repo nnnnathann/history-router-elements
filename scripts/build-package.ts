@@ -11,6 +11,9 @@ mkdirSync(outdir, { recursive: true })
 copyFileSync("README.md", resolve(outdir, "README.md"))
 
 const { devDependencies, scripts, main, module, browser, ...publicFields } = pkg
+
+delete (publicFields as any)["private"]
+
 const buildData = [["main", main], ["module", module], ["browser", browser]].reduce((bd, [key, file]) => {
     const base = basename(file)
     const infile = resolve(file)
